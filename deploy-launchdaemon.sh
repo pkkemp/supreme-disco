@@ -13,11 +13,11 @@ cat << EOF > /Library/LaunchDaemons/com.pretendco.sso-verify.plist
     <true/>
     <key>ProgramArguments</key> 
     <array>
-    <string>/Users/Shared/script</string>
-    <string>-notification</string>
-    <string>com.apple.KerberosPlugin.InternalNetworkAvailable</string>
-    <string>-action</string>
-    <string>/Users/Shared/script</string> 
+        <string>/Users/Shared/script</string>
+        <string>-notification</string>
+        <string>com.apple.KerberosPlugin.InternalNetworkAvailable</string>
+        <string>-action</string>
+        <string>/Users/Shared/script</string> 
     </array>
 </dict>
 </plist>
