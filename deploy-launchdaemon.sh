@@ -13,11 +13,11 @@ cat << EOF > /Library/LaunchDaemons/com.pretendco.sso-verify.plist
     <true/>
     <key>ProgramArguments</key> 
     <array>
-    <string><—-replace with path to sample distributed notification script—-></string>
+    <string>/Users/Shared/script</string>
     <string>-notification</string>
-    <string><—-replace with notification name—-></string>
+    <string>com.apple.KerberosPlugin.InternalNetworkAvailable</string>
     <string>-action</string>
-    <string><—-replace with path to script to execute when notification is posted—-></string> 
+    <string>/Users/Shared/script</string> 
     </array>
 </dict>
 </plist>
