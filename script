@@ -26,8 +26,11 @@ let app = NSApplication.shared
 class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ notification: Notification) {
         let scriptPath: String = CommandLine.arguments.first!
+        let defaultLog = Logger()
+        defaultLog.log("Log message from Kerberos SSO Extension")
         guard let notificationName = UserDefaults.standard.string(forKey: "notification") else {
             print("\(scriptPath): No notification passed, exiting...")
+            
             exit(1) }
         guard let actionPath = UserDefaults.standard.string(forKey: "action") else { print("\(scriptPath): No action passed, exiting...")
             exit(1)
