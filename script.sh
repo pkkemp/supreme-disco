@@ -1,0 +1,41 @@
+#!/usr/bin/env xcrun swift
+import Foundation
+import AppKit
+class NotifyHandler {
+    var notification: String
+    var action: String
+    init(notification: String, action: String) {
+        self.notification = notification
+        self.action = action }
+    func observe() {
+        DistributedNotificationCenter.default.addObserver(
+            forName: Notification.Name(notification), object: nil,
+            queue: nil,
+            using: self.gotNotification(notification:))
+    }
+    func gotNotification(notification: Notification) {
+        let task = Process()
+        task.launchPath = "/bin/zsh"
+         task.arguments = ["-c", self.action]
+        task.launch()
+    }
+}
+
+let app = NSApplication.shared
+
+class AppDelegate: NSObject, NSApplicationDelegate {
+    func applicationDidFinishLaunching(_ notification: Notification) {
+        let scriptPath: String = CommandLine.arguments.first!
+        guard let notificationName = UserDefaults.standard.string(forKey: "notification") else {
+            print("\(scriptPath): No notification passed, exiting...")
+            exit(1) }
+        guard let actionPath = UserDefaults.standard.string(forKey: "action") else { print("\(scriptPath): No action passed, exiting...")
+            exit(1)
+        }
+        let nh = NotifyHandler.init(notification: notificationName, action: actionPath)
+        nh.observe()
+    }
+}
+let delegate = AppDelegate()
+app.delegate = delegate
+app.run()
